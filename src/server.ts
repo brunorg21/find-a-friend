@@ -9,5 +9,5 @@ app
     host: "0.0.0.0",
   })
   .then(() => {
-    console.log("http server running");
+    console.log("Http server running");
   });
