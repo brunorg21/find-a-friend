@@ -14,11 +14,11 @@ datasource db {
 }
 
 model Pet {
-  id             String        @id @default(uuid())
+  id             String       @id @default(uuid())
   name           String
   about          String?
-  organization   Organization? @relation(fields: [organizationId], references: [id])
-  organizationId String?
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  organizationId String
 
   @@map("pet")
 }
