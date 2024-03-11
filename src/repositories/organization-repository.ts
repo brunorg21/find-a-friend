@@ -10,5 +10,5 @@ export interface OrganizationRepository {
     data: Prisma.OrganizationUncheckedCreateInput
   ): Promise<Organization>;
   login(data: LoginProps): Promise<Organization>;
-  findPetsByCity(city: string): Promise<Organization[]>;
+  findPetsByQuery(query: string): Promise<Organization[]>;
 }

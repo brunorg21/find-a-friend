@@ -1,8 +1,16 @@
 import { Organization, Pet, Prisma } from "@prisma/client";
 import { PetRepository } from "../pet-repository";
 import { randomUUID } from "crypto";
+import { InMemoryOrganizationRepository } from "./in-memory-organization-repository";
+
+export interface FindManyPetsByCharacteristicsProps {
+  query: string;
+  city: string;
+}
 
 export class InMemoryPetRepository implements PetRepository {
+  constructor(private orgsRepository?: InMemoryOrganizationRepository) {}
+
   public items: Pet[] = [];
 
   async create(data: Prisma.PetUncheckedCreateInput): Promise<Pet> {
@@ -24,8 +32,17 @@ export class InMemoryPetRepository implements PetRepository {
     return this.items.filter((pet) => orgs.includes(pet.organizationId));
   }
 
-  async findManyPetsByCharacteristics(q: string): Promise<Pet[]> {
-    return this.items.filter((pet) => pet.about?.includes(q));
+  async findManyPetsByCharacteristics({
+    city,
+    query,
+  }: FindManyPetsByCharacteristicsProps): Promise<Pet[]> {
+    const orgsByCity = this.orgsRepository?.items.filter(
+      (org) => org.city === city
+    );
+    console.log(orgsByCity);
+    return this.items
+      .filter((pet) => orgsByCity?.some((org) => org.id === pet.organizationId))
+      .filter((pet) => pet.about?.toLowerCase().includes(query.toLowerCase()));
   }
   async findUniquePet(petId: string): Promise<Pet | null> {
     const pet = this.items.find((pet) => pet.id === petId);

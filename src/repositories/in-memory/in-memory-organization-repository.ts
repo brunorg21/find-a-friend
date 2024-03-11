@@ -3,7 +3,7 @@ import { LoginProps, OrganizationRepository } from "../organization-repository";
 import { randomUUID } from "crypto";
 
 export class InMemoryOrganizationRepository implements OrganizationRepository {
-  private items: Organization[] = [];
+  public items: Organization[] = [];
 
   async register(
     data: Prisma.OrganizationUncheckedCreateInput
@@ -27,7 +27,7 @@ export class InMemoryOrganizationRepository implements OrganizationRepository {
     throw new Error("Method not implemented.");
   }
 
-  async findPetsByCity(city: string): Promise<Organization[]> {
+  async findPetsByQuery(city: string): Promise<Organization[]> {
     return this.items.filter(
       (organization) => organization.city.toLowerCase() === city.toLowerCase()
     );

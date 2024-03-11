@@ -1,6 +1,7 @@
 import { InMemoryPetRepository } from "@/repositories/in-memory/in-memory-pet-repository";
 import { beforeEach, describe, expect, it } from "vitest";
 import { FindUniquePetUseCase } from "./find-unique-pet";
+import { PetNoExistError } from "./errors/pet-not-exist-error";
 
 let petRepository: InMemoryPetRepository;
 let sut: FindUniquePetUseCase;
@@ -26,6 +27,11 @@ describe("find unique pet use case", async () => {
         name: "Mario",
         organizationId: "organization-1",
       })
+    );
+  });
+  it("should not be able to find pet with wrong id", async () => {
+    expect(async () => await sut.execute("invalid-id")).rejects.toBeInstanceOf(
+      PetNoExistError
     );
   });
 });
