@@ -18,13 +18,13 @@ export class InMemoryPetRepository implements PetRepository {
     return pet;
   }
 
-  async findManyByOrgs(organizations: Organization[]): Promise<Pet[]> {
+  async findManyPetsByOrgs(organizations: Organization[]): Promise<Pet[]> {
     const orgs = organizations.map((org) => org.id);
 
     return this.items.filter((pet) => orgs.includes(pet.organizationId));
   }
 
-  async listByCharacteristics(q: string): Promise<Pet[]> {
+  async findManyPetsByCharacteristics(q: string): Promise<Pet[]> {
     return this.items.filter((pet) => pet.about?.includes(q));
   }
   async findUniquePet(petId: string): Promise<Pet | null> {

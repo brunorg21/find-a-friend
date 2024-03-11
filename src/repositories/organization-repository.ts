@@ -1,6 +1,6 @@
 import { Organization, Prisma } from "@prisma/client";
 
-interface LoginProps {
+export interface LoginProps {
   email: string;
   password: string;
 }
@@ -10,4 +10,5 @@ export interface OrganizationRepository {
     data: Prisma.OrganizationUncheckedCreateInput
   ): Promise<Organization>;
   login(data: LoginProps): Promise<Organization>;
+  findPetsByCity(city: string): Promise<Organization[]>;
 }
