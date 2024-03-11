@@ -10,7 +10,7 @@ export class InMemoryPetRepository implements PetRepository {
       id: data.id ?? randomUUID(),
       about: data.about ?? null,
       name: data.name,
-      organizationId: data.organizationId!,
+      organizationId: data.organizationId,
     };
 
     this.items.push(pet);
