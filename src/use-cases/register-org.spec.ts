@@ -37,7 +37,7 @@ describe("register org use case", async () => {
       street: "Rua José",
     });
 
-    expect(
+    await expect(
       async () =>
         await sut.execute({
           city: "Pindamonhangaba",

@@ -23,16 +23,11 @@ export class InMemoryOrganizationRepository implements OrganizationRepository {
 
     return organization;
   }
-  async login(data: LoginProps): Promise<Organization> {
-    throw new Error("Method not implemented.");
-  }
-
   async findPetsByQuery(city: string): Promise<Organization[]> {
     return this.items.filter(
       (organization) => organization.city.toLowerCase() === city.toLowerCase()
     );
   }
-
   async findByEmail(email: string): Promise<Organization | null> {
     const org = this.items.find((org) => org.email === email);
 
@@ -41,5 +36,15 @@ export class InMemoryOrganizationRepository implements OrganizationRepository {
     }
 
     return org;
+  }
+
+  async findById(orgId: string): Promise<Organization | null> {
+    const organization = this.items.find((org) => org.id === orgId);
+
+    if (!organization) {
+      return null;
+    }
+
+    return organization;
   }
 }

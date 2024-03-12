@@ -39,7 +39,7 @@ export class InMemoryPetRepository implements PetRepository {
     const orgsByCity = this.orgsRepository?.items.filter(
       (org) => org.city === city
     );
-    console.log(orgsByCity);
+
     return this.items
       .filter((pet) => orgsByCity?.some((org) => org.id === pet.organizationId))
       .filter((pet) => pet.about?.toLowerCase().includes(query.toLowerCase()));

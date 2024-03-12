@@ -3,6 +3,7 @@ import { ResourceNotFound } from "./errors/resource-not-found";
 import { PetNoExistError } from "./errors/pet-not-exist-error";
 import { OrganizationRepository } from "@/repositories/organization-repository";
 import { OrgAlreadyExistsError } from "./errors/org-already-exists-error";
+import { hash } from "bcrypt";
 
 interface RegisterOrgProps {
   city: string;
@@ -33,11 +34,13 @@ export class RegisterOrgUseCase {
       throw new OrgAlreadyExistsError();
     }
 
+    const passwordHash = await hash(password, 8);
+
     const organization = await this.organizationRepository.register({
       city,
       email,
       number,
-      password,
+      password: passwordHash,
       phone,
       responsible,
       street,

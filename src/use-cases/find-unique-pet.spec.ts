@@ -30,8 +30,8 @@ describe("find unique pet use case", async () => {
     );
   });
   it("should not be able to find pet with wrong id", async () => {
-    expect(async () => await sut.execute("invalid-id")).rejects.toBeInstanceOf(
-      PetNoExistError
-    );
+    await expect(
+      async () => await sut.execute("invalid-id")
+    ).rejects.toBeInstanceOf(PetNoExistError);
   });
 });

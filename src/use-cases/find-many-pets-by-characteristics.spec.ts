@@ -44,7 +44,7 @@ describe("find many pets by characteristics use case", async () => {
     expect(pet).toHaveLength(2);
   });
   it("should not be able to find pet with wrong id", async () => {
-    expect(
+    await expect(
       async () => await sut.execute("aaa", "Taubaté")
     ).rejects.toBeInstanceOf(PetNoExistError);
   });
