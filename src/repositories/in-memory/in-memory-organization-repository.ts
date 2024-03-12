@@ -32,4 +32,14 @@ export class InMemoryOrganizationRepository implements OrganizationRepository {
       (organization) => organization.city.toLowerCase() === city.toLowerCase()
     );
   }
+
+  async findByEmail(email: string): Promise<Organization | null> {
+    const org = this.items.find((org) => org.email === email);
+
+    if (!org) {
+      return null;
+    }
+
+    return org;
+  }
 }

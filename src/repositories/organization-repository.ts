@@ -11,4 +11,5 @@ export interface OrganizationRepository {
   ): Promise<Organization>;
   login(data: LoginProps): Promise<Organization>;
   findPetsByQuery(query: string): Promise<Organization[]>;
+  findByEmail(email: string): Promise<Organization | null>;
 }

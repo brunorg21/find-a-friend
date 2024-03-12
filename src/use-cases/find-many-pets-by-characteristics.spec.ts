@@ -41,8 +41,6 @@ describe("find many pets by characteristics use case", async () => {
 
     const { pet } = await sut.execute("lindo", "Pindamonhangaba");
 
-    console.log(pet);
-
     expect(pet).toHaveLength(2);
   });
   it("should not be able to find pet with wrong id", async () => {
