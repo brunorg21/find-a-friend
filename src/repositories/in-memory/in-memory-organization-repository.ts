@@ -23,7 +23,7 @@ export class InMemoryOrganizationRepository implements OrganizationRepository {
 
     return organization;
   }
-  async findPetsByQuery(city: string): Promise<Organization[]> {
+  async findPetsByCity(city: string): Promise<Organization[]> {
     return this.items.filter(
       (organization) => organization.city.toLowerCase() === city.toLowerCase()
     );

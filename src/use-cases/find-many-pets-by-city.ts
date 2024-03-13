@@ -1,7 +1,6 @@
 import { PetRepository } from "@/repositories/pet-repository";
 import { ResourceNotFound } from "./errors/resource-not-found";
 import { OrganizationRepository } from "@/repositories/organization-repository";
-import { PetNoExistError } from "./errors/pet-not-exist-error";
 
 export class FindManyPetsByCity {
   constructor(
@@ -10,7 +9,7 @@ export class FindManyPetsByCity {
   ) {}
 
   async execute(city: string) {
-    const organizations = await this.organizationRepository.findPetsByQuery(
+    const organizations = await this.organizationRepository.findPetsByCity(
       city
     );
 
