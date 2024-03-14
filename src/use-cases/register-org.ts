@@ -47,7 +47,8 @@ export class RegisterOrgUseCase {
     });
 
     return {
-      organization,
+      ...organization,
+      password: undefined,
     };
   }
 }

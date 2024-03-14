@@ -14,7 +14,7 @@ describe("register org use case", async () => {
   });
 
   it("should be able to register a org", async () => {
-    const { organization } = await sut.execute({
+    const organization = await sut.execute({
       city: "Pindamonhangaba",
       email: "bruno@email.com",
       number: 120,

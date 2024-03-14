@@ -21,7 +21,7 @@ export async function register(req: FastifyRequest, reply: FastifyReply) {
   const registerUseCase = makeRegisterUseCase();
 
   try {
-    const { organization } = await registerUseCase.execute({
+    await registerUseCase.execute({
       email,
       password,
       city,
@@ -31,9 +31,7 @@ export async function register(req: FastifyRequest, reply: FastifyReply) {
       street,
     });
 
-    return reply.status(200).send({
-      organization,
-    });
+    return reply.status(200).send();
   } catch (error) {
     if (error instanceof OrgAlreadyExistsError) {
       return reply.status(400).send({
