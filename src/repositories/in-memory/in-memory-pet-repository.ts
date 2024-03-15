@@ -35,14 +35,18 @@ export class InMemoryPetRepository implements PetRepository {
   async findManyPetsByCharacteristics({
     city,
     query,
-  }: FindManyPetsByCharacteristicsProps): Promise<Pet[]> {
+  }: FindManyPetsByCharacteristicsProps): Promise<Pet[] | null> {
     const orgsByCity = this.orgsRepository?.items.filter(
       (org) => org.city === city
     );
-
-    return this.items
+    const pets = this.items
       .filter((pet) => orgsByCity?.some((org) => org.id === pet.organizationId))
       .filter((pet) => pet.about?.toLowerCase().includes(query.toLowerCase()));
+
+    if (pets.length === 0) {
+      return null;
+    }
+    return pets;
   }
   async findUniquePet(petId: string): Promise<Pet | null> {
     const pet = this.items.find((pet) => pet.id === petId);

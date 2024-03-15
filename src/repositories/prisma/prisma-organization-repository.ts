@@ -12,7 +12,7 @@ export class PrismaOrganizationRepository implements OrganizationRepository {
 
     return organization;
   }
-  async findPetsByCity(city: string): Promise<Organization[]> {
+  async findPetsByCity(city: string): Promise<Organization[] | null> {
     const organizations = await prisma.organization.findMany({
       where: {
         city: {
@@ -20,6 +20,10 @@ export class PrismaOrganizationRepository implements OrganizationRepository {
         },
       },
     });
+
+    if (!organizations) {
+      return null;
+    }
 
     return organizations;
   }

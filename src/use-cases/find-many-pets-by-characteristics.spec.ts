@@ -1,20 +1,20 @@
 import { InMemoryPetRepository } from "@/repositories/in-memory/in-memory-pet-repository";
 import { beforeEach, describe, expect, it } from "vitest";
-import { FindUniquePetUseCase } from "./find-unique-pet";
+
 import { PetNoExistError } from "./errors/pet-not-exist-error";
-import { findManyPetsByCharacteristics } from "./find-many-pets-by-characteristics";
+import { FindManyPetsByCharacteristics } from "./find-many-pets-by-characteristics";
 import { InMemoryOrganizationRepository } from "@/repositories/in-memory/in-memory-organization-repository";
 import { hash } from "bcrypt";
 
 let petRepository: InMemoryPetRepository;
 let organizationRepository: InMemoryOrganizationRepository;
-let sut: findManyPetsByCharacteristics;
+let sut: FindManyPetsByCharacteristics;
 
 describe("find many pets by characteristics use case", async () => {
   beforeEach(() => {
     organizationRepository = new InMemoryOrganizationRepository();
     petRepository = new InMemoryPetRepository(organizationRepository);
-    sut = new findManyPetsByCharacteristics(petRepository);
+    sut = new FindManyPetsByCharacteristics(petRepository);
   });
 
   it("should be able to find many pets by characteristics", async () => {

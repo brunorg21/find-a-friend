@@ -31,16 +31,22 @@ export class PrismaPetRepository implements PetRepository {
   async findManyPetsByCharacteristics({
     city,
     query,
-  }: FindManyPetsByCharacteristicsProps): Promise<Pet[]> {
+  }: FindManyPetsByCharacteristicsProps): Promise<Pet[] | null> {
     const orgsByCity = await prisma.organization.findMany({
       where: {
         city,
       },
     });
     const pets = await prisma.pet.findMany();
-    return pets
+
+    const filteredPets = pets
       .filter((pet) => orgsByCity?.some((org) => org.id === pet.organizationId))
       .filter((pet) => pet.about?.toLowerCase().includes(query.toLowerCase()));
+
+    if (filteredPets.length === 0) {
+      return null;
+    }
+    return filteredPets;
   }
   async findUniquePet(petId: string): Promise<Pet | null> {
     const pet = await prisma.pet.findUnique({

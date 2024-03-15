@@ -3,7 +3,7 @@ import { ResourceNotFound } from "./errors/resource-not-found";
 import { OrganizationRepository } from "@/repositories/organization-repository";
 import { PetNoExistError } from "./errors/pet-not-exist-error";
 
-export class findManyPetsByCharacteristics {
+export class FindManyPetsByCharacteristics {
   constructor(private petRepository: PetRepository) {}
 
   async execute(q: string, city: string) {
@@ -12,7 +12,7 @@ export class findManyPetsByCharacteristics {
       query: q,
     });
 
-    if (pet.length === 0) {
+    if (!pet) {
       throw new PetNoExistError();
     }
 
