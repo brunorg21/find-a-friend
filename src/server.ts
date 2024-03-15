@@ -4,6 +4,7 @@ import { env } from "./env";
 import { fastifyJwt } from "@fastify/jwt";
 import { organizationRoutes } from "./controllers/organizations/route";
 import { ZodError } from "zod";
+import { petRoutes } from "./controllers/pet/route";
 
 const app = fastify();
 
@@ -12,13 +13,14 @@ app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
 
   sign: {
-    expiresIn: "20m",
+    expiresIn: "7d",
   },
 });
 app.register(fastifyCookie);
 
 //Routes
 app.register(organizationRoutes);
+app.register(petRoutes);
 
 //Error Handling
 app.setErrorHandler((error, _, reply) => {

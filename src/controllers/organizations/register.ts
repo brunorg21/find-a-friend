@@ -31,7 +31,7 @@ export async function register(req: FastifyRequest, reply: FastifyReply) {
       street,
     });
 
-    return reply.status(200).send();
+    return reply.status(201).send();
   } catch (error) {
     if (error instanceof OrgAlreadyExistsError) {
       return reply.status(400).send({

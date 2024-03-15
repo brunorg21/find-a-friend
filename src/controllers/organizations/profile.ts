@@ -2,7 +2,7 @@ import { ResourceNotFound } from "@/use-cases/errors/resource-not-found";
 import { makeGetOrganizationProfileUseCase } from "@/use-cases/factories/makeGetOrganizationProfileUseCase";
 import { FastifyReply, FastifyRequest } from "fastify";
 
-export async function register(req: FastifyRequest, reply: FastifyReply) {
+export async function profile(req: FastifyRequest, reply: FastifyReply) {
   const getOrganizationProfileUseCase = makeGetOrganizationProfileUseCase();
 
   try {
